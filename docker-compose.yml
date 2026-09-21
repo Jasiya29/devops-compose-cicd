@@ -1,0 +1,26 @@
+services:
+
+  frontend:
+    build: ./frontend
+    container_name: compose-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: compose-backend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    container_name: compose-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devopsdb
+    ports:
+      - "3306:3306"
